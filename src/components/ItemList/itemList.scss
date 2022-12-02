@@ -1,0 +1,23 @@
+.itemList {
+	flex-grow: 1;
+
+	// border: 1px solid white;
+	&__item {
+		// border: 1px solid grey;
+		padding: 5px 15px;
+	}
+
+	&__question {
+		// padding: 5px 0 5px 10px;
+		color: Moccasin;
+		font-size: 18px;
+	}
+
+	&__answer {
+		// padding: 5px 10px 5px 0;
+		// display: block;
+		text-align: right;
+		color: LightBlue;
+		font-size: 16px;
+	}
+}

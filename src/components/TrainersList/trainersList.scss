@@ -1,0 +1,89 @@
+.trainersList {
+	padding: 15px;
+	width: 60%;
+	margin-right: 25px;
+
+
+
+	&__trainer {
+		display: grid;
+		grid-template: 60px / repeat(20, 1fr);
+		margin-bottom: 25px;
+		border: 2px dashed Gainsboro;
+		user-select: none;
+		font-family: sans-serif;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	&__name {
+		color: Gainsboro;
+		grid-column: 1 / 15;
+		padding-left: 15px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			// transform: scale(1.03);
+			text-decoration: underline 3px;
+			font-size: 26px;
+		}
+
+		&:active {
+			// transform: scale(0.97);
+			font-size: 26px;
+		}
+
+		&_active {
+			text-decoration: underline;
+			font-size: 26px;
+			font-style: italic;
+			transform: scale(1.01);
+			color: Khaki;
+		}
+	}
+
+	&__start,
+	&__edit,
+	&__remove {
+		margin: 0 auto;
+		border-radius: 7px;
+		padding: 2px 3px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: none;
+		cursor: pointer;
+		transition: all 0.1s linear;
+		height: 40px;
+
+		&:hover {
+			transform: scale(1.2);
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+
+	&__start {
+		grid-column: 15 / 17;
+
+		&:hover {
+			transform: scale(1.2);
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+
+	&__edit {
+		grid-column: 17 / 19;
+	}
+
+	&__remove {
+		grid-column: 19 / 21;
+	}
+}
