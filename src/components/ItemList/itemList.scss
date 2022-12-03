@@ -1,23 +1,61 @@
 .itemList {
-	flex-grow: 1;
+	padding: 15px;
+	width: 40%;
+	border: 1px solid Silver;
+	border-radius: 7px;
 
-	// border: 1px solid white;
 	&__item {
-		// border: 1px solid grey;
-		padding: 5px 15px;
+		padding: 2px 0;
 	}
 
-	&__question {
-		// padding: 5px 0 5px 10px;
+	h3 {
+		color: LightCyan;
+		margin-bottom: 5px;
+		font-size: 24px;
+		text-align: center;
+	}
+
+	p {
+		display: block;
+		text-decoration: none;
 		color: Moccasin;
+		margin-bottom: 20px;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+	}
+
+	h4 {
+		color: LightCyan;
+		margin-bottom: 5px;
 		font-size: 18px;
 	}
 
+
+	&__question {
+		color: rgb(211, 202, 118);
+		font-size: 18px;
+		font-weight: bold;
+		font-family: Arial;
+	}
+
 	&__answer {
-		// padding: 5px 10px 5px 0;
-		// display: block;
 		text-align: right;
-		color: LightBlue;
+		color: PowderBlue;
 		font-size: 16px;
+	}
+}
+
+.chose {
+	padding: 15px;
+	width: 40%;
+	border: 1px solid LightSteelBlue;
+	border-radius: 7px;
+
+	h2 {
+		text-align: center;
+		color: LightBlue;
+		margin-bottom: 25px;
+		font-size: 24px;
 	}
 }

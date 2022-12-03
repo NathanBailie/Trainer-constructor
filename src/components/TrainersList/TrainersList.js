@@ -1,9 +1,10 @@
 import './trainersList.scss';
-import play from './play.png';
-import edit from './edit.png';
-import remove from './remove.png';
+import play from './icons/play.png';
+import edit from './icons/edit.png';
+import remove from './icons/remove.png';
+import add from './icons/add.png';
 
-const TrainersList = ({ data, onToggleProperty, onRemoveItem }) => {
+const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainers }) => {
 	const trnList = data.map(item => {
 		const { name, id } = item;
 		let nameClasses;
@@ -12,6 +13,7 @@ const TrainersList = ({ data, onToggleProperty, onRemoveItem }) => {
 		} else {
 			nameClasses = 'trainersList__name';
 		}
+
 		return (
 			<div
 				key={name}
@@ -24,33 +26,36 @@ const TrainersList = ({ data, onToggleProperty, onRemoveItem }) => {
 					src={play}
 					alt="play"
 					className='trainersList__start'
-					title={'start this trainer'} />
+					title={'Start training'} />
 				<img
 					src={edit}
 					alt="play"
 					className='trainersList__edit'
-					title={'edit this trainer'} />
+					title={'Edit this trainer'} />
 				<img
 					src={remove}
 					alt="play"
 					className='trainersList__remove'
-					title={'remove this trainer'}
-					onClick={() => onRemoveItem(id)} />
+					title={'Remove this trainer'}
+					onClick={() => onRemoveTrainer(id)} />
 			</div>
 		);
 	});
 
 
-	// function onCreateTrainerList(data) {
-	// 	const trn = [];
-	// 	for (let trainer of data) {
-	// 		trn.push({ name: trainer['name'], id: trainer['id'] });
-	// 	};
-	// 	return trn;
-	// }
-
 	return (
 		<div className='trainersList'>
+			<div className="trainersList__title">
+				<button>
+					<div>
+						<span>Add new</span>
+						<img src={add} alt="add" />
+					</div>
+				</button>
+				<h3>Amount of trainers:
+					<span> {amountOfTrainers}</span>
+				</h3>
+			</div>
 			{trnList}
 		</div>
 	);

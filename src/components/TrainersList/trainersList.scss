@@ -1,9 +1,81 @@
 .trainersList {
-	padding: 15px;
 	width: 60%;
 	margin-right: 25px;
+	padding: 15px;
+
+	&__title {
+		display: flex;
+		margin-bottom: 25px;
+		justify-content: space-between;
+
+		h3 {
+			display: flex;
+			align-items: center;
+			color: Azure;
+			font-size: 24px;
+			padding-right: 15px;
 
 
+			span {
+				margin-left: 5px;
+				color: DeepSkyBlue;
+			}
+		}
+
+		button {
+			width: 100px;
+			height: 30px;
+			overflow: hidden;
+			border: none;
+			border-radius: 7px;
+			box-shadow: 0px 0px 1px 3px rgb(93, 110, 128);
+			background: LightSlateGray;
+			font-size: 16px;
+			color: white;
+			cursor: pointer;
+			user-select: none;
+
+			&:hover {
+				box-shadow: 0px 0px 2px 4px rgb(174, 198, 223);
+				background: LightSlateGray;
+
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+
+			div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				transition: all 0.3s ease-out;
+
+				&:hover {
+					transform: translateY(-30px);
+				}
+
+				span {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 30px;
+				}
+
+				img {
+					height: 25px;
+					width: 25px;
+					margin-top: 2.5px;
+				}
+			}
+
+			div {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+		}
+	}
 
 	&__trainer {
 		display: grid;
@@ -17,7 +89,7 @@
 	}
 
 	&__name {
-		color: Gainsboro;
+		color: LightCyan;
 		grid-column: 1 / 15;
 		padding-left: 15px;
 		height: 100%;
@@ -40,7 +112,7 @@
 			font-size: 26px;
 			font-style: italic;
 			transform: scale(1.01);
-			color: Khaki;
+			color: Moccasin;
 		}
 	}
 

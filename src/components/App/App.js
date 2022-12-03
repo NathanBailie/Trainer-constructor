@@ -1,26 +1,30 @@
 import './app.scss';
 import TrainersList from '../TrainersList';
 import ItemList from '../ItemList';
-
+import TrainerForm from '../TrainerForm';
 import uuid from 'react-uuid';
 import { useState, useEffect } from 'react';
 
 const App = () => {
 	const allData = [
 		{
-			name: 'Числительные', id: uuid(), active: true,
+			name: 'Числительные', description: 'Тренажер для повторения числительных на английском языке', id: uuid(), active: true,
 			items: [
 				onCreateItem('ноль', 'zero'),
 				onCreateItem('один', 'one'),
+				onCreateItem('два', 'two'),
 				onCreateItem('три', 'three'),
 				onCreateItem('четыре', 'four'),
 				onCreateItem('пять', 'five'),
+				onCreateItem('шесть', 'six'),
+				onCreateItem('семь', 'seven'),
+				onCreateItem('восемь', 'eight'),
 				onCreateItem('девять', 'nine'),
 				onCreateItem('десять', 'ten')
 			],
 		},
 		{
-			name: 'Цвета', id: uuid(), active: false,
+			name: 'Цвета', description: 'Тренажер для повторения различных цветов на английском языке', id: uuid(), active: false,
 			items: [
 				onCreateItem('красный', 'red'),
 				onCreateItem('зеленый', 'green'),
@@ -41,7 +45,13 @@ const App = () => {
 	];
 
 	const [data, setData] = useState(allData);
-	const activeTrainer = data.filter(item => item.active);
+	const [activeTrainer, setActiveTrainer] = useState([]);
+	const [edit, setEdit] = useState(false);
+	const amountOfTrainers = data.length;
+	useEffect(() => {
+		const actTrainer = data.filter(item => item.active);
+		setActiveTrainer(actTrainer);
+	}, [data]);
 
 	function onCreateItem(question, answer) {
 		return { question: question, answer: answer, id: uuid() };
@@ -57,8 +67,18 @@ const App = () => {
 		setData(newData);
 	};
 
-	function onRemoveItem(id) {
+	function onRemoveTrainer(id) {
 		const newData = data.filter(item => item.id !== id);
+		setData(newData);
+	};
+
+	function onRemoveItem(trainerId, itemId) {
+		const oldTrainer = data.filter(trainer => trainer.id === trainerId);
+		const [{ items }] = oldTrainer;
+		const oldTrainerIndex = data.findIndex(trainer => trainer.id === oldTrainer[0].id);
+		const newItems = items.filter(item => item.id !== itemId);
+		const newTrainer = { ...oldTrainer[0], ['items']: newItems };
+		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex) + 1];
 		setData(newData);
 	};
 
@@ -67,12 +87,16 @@ const App = () => {
 		<div className="app">
 			<div className="container">
 				<div className="app__wraper">
-					<TrainersList
+					<TrainerForm
+						activeTrainer={activeTrainer}
+						onRemoveItem={onRemoveItem} />
+					{/* <TrainersList
 						data={data}
 						onToggleProperty={onToggleProperty}
-						onRemoveItem={onRemoveItem} />
+						onRemoveTrainer={onRemoveTrainer}
+						amountOfTrainers={amountOfTrainers} />
 					<ItemList
-						activeTrainer={activeTrainer} />
+						activeTrainer={activeTrainer} /> */}
 				</div>
 			</div>
 		</div>
