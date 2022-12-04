@@ -1,8 +1,98 @@
 .trainerForm {
 	width: 100%;
 
-	h2 {
+	&__title {
+		color: Salmon;
+		text-align: center;
+		margin-bottom: 7px;
+		user-select: none;
+	}
+
+	&__subtitle {
+		max-width: 450px;
+		text-align: center;
 		color: Gainsboro;
+		font-style: italic;
+		font-size: 16px;
+		user-select: none;
+		margin: 0 auto 40px;
+	}
+
+	&__name,
+	&__description {
+		margin-bottom: 5px;
+		user-select: none;
+		text-align: center;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline 2px;
+			transform: scale(1.02);
+		}
+
+		&:active {
+			text-decoration: underline 2px;
+			transform: scale(0.98);
+		}
+	}
+
+	&__name {
+		color: white;
+		max-width: 500px;
+		margin: 0 auto 3px;
+	}
+
+	&__description {
+		color: Beige;
+		max-width: 500px;
+		margin: 0 auto 3px;
+	}
+
+	&__nameInput,
+	&__descrArea {
+		height: 30px;
+		width: 500px;
+		padding-left: 10px;
+		font-size: 14px;
+		border-radius: 7px;
+		border: none;
+		margin: 0 auto 5px;
+		display: block;
+	}
+
+	&__nameInput {
+		background: LavenderBlush;
+		box-shadow: 0px 0px 3px Gainsboro;
+
+		&:focus {
+			outline: solid DarkGrey 2px;
+			box-shadow: 0px 0px 3px 2px DarkGray;
+		}
+	}
+
+	&__descrArea {
+		background: Beige;
+		box-shadow: 0px 0px 3px Beige;
+		resize: none;
+		height: 100px;
+
+		&:focus {
+			outline: solid Gray 2px;
+			box-shadow: 0px 0px 3px 2px AntiqueWhite;
+		}
+	}
+
+	&__questAmount {
+		text-align: center;
+		color: LightGray;
+		margin-bottom: 15px;
+		font-size: 14px;
+		user-select: none;
+
+		span {
+			color: DeepSkyBlue;
+			font-size: 16px;
+		}
 	}
 
 	&__head,
@@ -13,9 +103,13 @@
 		align-items: center;
 		text-align: center;
 		font-size: 18px;
-		color: white;
+		color: LightCyan;
 		border: 1px solid grey;
 		border-radius: 7px;
+	}
+
+	&__head {
+		margin-bottom: 15px;
 	}
 
 	&__number,
@@ -41,16 +135,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		user-select: none;
 	}
 
-	&__question,
-	&__ques,
-	&__answer,
-	&__answ,
-	&__actions,
-	&__remove {
-		cursor: pointer;
-	}
 
 	&__ques,
 	&__answ {
@@ -70,16 +157,17 @@
 	&__number,
 	&__numb {
 		grid-column: 1;
-		user-select: none;
 	}
 
 	&__question,
-	&__ques {
+	&__ques,
+	&__questionInput {
 		grid-column: 2 / 10;
 	}
 
 	&__answer,
-	&__answ {
+	&__answ,
+	&__answerInput {
 		grid-column: 10 / 18;
 	}
 
@@ -88,12 +176,8 @@
 		grid-column: 18 / 21;
 	}
 
-	&__head {
-		margin-bottom: 15px;
-	}
-
 	&__number {
-		color: DeepSkyBlue;
+		color: rgb(100, 197, 197);
 	}
 
 	&__question {
@@ -101,11 +185,11 @@
 	}
 
 	&__answer {
-		color: rgb(129, 203, 212);
+		color: LightSkyBlue;
 	}
 
 	&__actions {
-		color: MistyRose;
+		color: rgb(241, 219, 216);
 	}
 
 	&__item {
@@ -114,6 +198,7 @@
 		border-radius: 0;
 		border-bottom: 1px solid grey;
 		margin-bottom: 10px;
+		height: 32px;
 	}
 
 	&__numb {
@@ -124,13 +209,42 @@
 		color: Moccasin;
 	}
 
+	&__questionInput,
+	&__answerInput {
+		height: 30px;
+		padding-left: 10px;
+		font-size: 14px;
+		border-radius: 7px;
+		border: none;
+	}
+
+	&__questionInput {
+		background: NavajoWhite;
+		box-shadow: 0px 0px 3px NavajoWhite;
+
+		&:focus {
+			outline: solid Peru 2px;
+			box-shadow: 0px 0px 3px 2px Chocolate;
+		}
+	}
+
+	&__answerInput {
+		background: PaleTurquoise;
+		box-shadow: 0px 0px 3px DeepSkyBlue;
+
+		&:focus {
+			outline: solid DodgerBlue 2px;
+			box-shadow: 0px 0px 3px 2px DodgerBlue;
+			// border: 1px solid SaddleBrown;
+		}
+	}
+
 	&__answ {
-		color: LightSkyBlue;
+		color: rgb(113, 201, 212);
 	}
 
 	&__remove {
 		cursor: pointer;
-		user-select: none;
 		padding: 2px;
 
 
