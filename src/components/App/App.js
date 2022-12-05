@@ -87,7 +87,7 @@ const App = () => {
 		const [{ items }] = oldTrainer;
 		const newItems = items.filter(item => item.id !== itemId);
 		const newTrainer = { ...oldTrainer[0], ['items']: newItems };
-		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex) + 1];
+		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
 		setData(newData);
 	};
 
