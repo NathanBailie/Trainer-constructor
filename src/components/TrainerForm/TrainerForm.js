@@ -2,7 +2,7 @@ import './trainerForm.scss';
 import remove from './remove.png';
 import { useState } from 'react';
 
-const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue }) => {
+const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue, onChangeEdit, onAddNewItem }) => {
 	const [nameValue, setNameValue] = useState('');
 	const [descrValue, setDescrValue] = useState('');
 	const [questionValue, setQuestionvalue] = useState('');
@@ -20,7 +20,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						<span
 							className="trainerForm__ques"
 							onClick={() => {
-								onToggleItemProp(id, 'questionEdit', item.id,);
+								onToggleItemProp(id, 'questionEdit', 'answerEdit', item.id);
 								setQuestionvalue(question)
 							}}
 						>{question}</span>
@@ -28,14 +28,14 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						<input
 							value={questionValue}
 							onChange={(e) => setQuestionvalue(e.target.value)}
-							onBlur={() => onChangevalue(id, 'question', questionValue, 'questionEdit', item.id)}
+							onBlur={() => onChangevalue(id, 'question', questionValue, 'questionEdit', item.id,)}
 							className="trainerForm__questionInput" />
 					}
 					{!answerEdit ?
 						<span
 							className="trainerForm__answ"
 							onClick={() => {
-								onToggleItemProp(id, 'answerEdit', item.id,);
+								onToggleItemProp(id, 'answerEdit', 'questionEdit', item.id);
 								setAnswerValue(answer)
 							}}
 						>{answer}</span>
@@ -67,7 +67,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						className='trainerForm__name'
 						title="The name of the trainer"
 						onClick={() => {
-							onToggleItemProp(id, 'nameEdit');
+							onToggleItemProp(id, 'nameEdit', 'descrEdit');
 							setNameValue(name)
 						}}
 					>{name}</h2>
@@ -84,7 +84,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						className='trainerForm__description'
 						title="The description of the trainer"
 						onClick={() => {
-							onToggleItemProp(id, 'descrEdit');
+							onToggleItemProp(id, 'descrEdit', 'nameEdit');
 							setDescrValue(description)
 						}}
 					>{description}</h4>
@@ -97,8 +97,6 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 					/>
 				}
 
-
-
 				<p className="trainerForm__questAmount">(Amount of questions - <span>{amountOfItems}</span>)</p>
 
 				<div className="trainerForm__head">
@@ -109,6 +107,14 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 					</span>
 				</div>
 				{result}
+				<button className="trainerForm__addButton"
+					onClick={() => onAddNewItem(activeTrainer)}>
+					Add new question
+				</button>
+				<button className="trainerForm__completeButton"
+					onClick={() => onChangeEdit()}>
+					Complete
+				</button>
 			</div>
 		);
 	};

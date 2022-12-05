@@ -24,6 +24,8 @@
 		user-select: none;
 		text-align: center;
 		cursor: pointer;
+		display: flex;
+		justify-content: center;
 
 		&:hover {
 			text-decoration: underline 2px;
@@ -98,7 +100,7 @@
 	&__head,
 	&__item {
 		display: grid;
-		grid-template: 30px / repeat(20, 1fr);
+		grid-template: minmax(30px, auto) / repeat(20, 1fr);
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -110,6 +112,14 @@
 
 	&__head {
 		margin-bottom: 15px;
+	}
+
+	&__item {
+		margin-bottom: 3px;
+		border: none;
+		border-radius: 0;
+		border-bottom: 1px solid grey;
+		margin-bottom: 10px;
 	}
 
 	&__number,
@@ -131,13 +141,12 @@
 	&__answ,
 	&__actions,
 	&__remove {
-		height: 30px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		user-select: none;
+		height: 100%;
 	}
-
 
 	&__ques,
 	&__answ {
@@ -152,6 +161,14 @@
 			text-decoration: underline 2px;
 			transform: scale(0.95);
 		}
+	}
+
+	&__answ {
+		color: rgb(113, 201, 212);
+	}
+
+	&__ques {
+		color: Moccasin;
 	}
 
 	&__number,
@@ -192,30 +209,22 @@
 		color: rgb(241, 219, 216);
 	}
 
-	&__item {
-		margin-bottom: 3px;
-		border: none;
-		border-radius: 0;
-		border-bottom: 1px solid grey;
-		margin-bottom: 10px;
-		height: 32px;
-	}
-
 	&__numb {
 		color: PaleTurquoise;
-	}
-
-	&__ques {
-		color: Moccasin;
 	}
 
 	&__questionInput,
 	&__answerInput {
 		height: 30px;
-		padding-left: 10px;
+		padding: 0px 10px 0px;
 		font-size: 14px;
 		border-radius: 7px;
 		border: none;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		vertical-align: center;
 	}
 
 	&__questionInput {
@@ -235,12 +244,7 @@
 		&:focus {
 			outline: solid DodgerBlue 2px;
 			box-shadow: 0px 0px 3px 2px DodgerBlue;
-			// border: 1px solid SaddleBrown;
 		}
-	}
-
-	&__answ {
-		color: rgb(113, 201, 212);
 	}
 
 	&__remove {
@@ -249,7 +253,8 @@
 
 
 		img {
-			height: 100%;
+			height: 30px;
+
 
 			&:hover {
 				transform: scale(1.2);
@@ -258,6 +263,62 @@
 			&:active {
 				transform: scale(0.95);
 			}
+		}
+	}
+
+	&__completeButton {
+		display: block;
+		padding: 7px 15px;
+		margin: 0 auto 0px;
+		border: none;
+		border-radius: 15px;
+		color: LightCyan;
+		font-size: 16px;
+		border: 1px solid SteelBlue;
+		box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+		transition: all 150ms ease-in-out;
+
+		&:hover {
+			box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+			color: white;
+			background: #4b4b4b;
+			border: 1px solid SkyBlue;
+			transform: scale(1.03);
+		}
+
+		&:active {
+			box-shadow: 0 0 10px 0 RoyalBlue inset, 0 0 10px 4px RoyalBlue;
+			color: white;
+			background: #3b3b3b;
+			border: 1px solid rgb(64, 110, 247);
+			transform: scale(0.97);
+		}
+	}
+
+	&__addButton {
+		display: block;
+		padding: 7px 15px;
+		margin: 25px 0px 0px auto;
+		width: 160px;
+		border: none;
+		border-radius: 15px;
+		color: black;
+		font-size: 16px;
+		background: rgb(53, 192, 53);
+		border: 1px solid darkgreen;
+		transition: all 150ms ease-in-out;
+
+
+		&:hover {
+			transform: scale(1.03);
+			background: rgb(72, 214, 72);
+		}
+
+		&:active {
+			transform: scale(0.97);
+			// background: radial-gradient(rgb(72, 207, 72), DarkGreen);
+			background: ForestGreen;
+			color: white;
 		}
 	}
 }

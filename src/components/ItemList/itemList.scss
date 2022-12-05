@@ -15,7 +15,7 @@
 		text-align: center;
 	}
 
-	p {
+	&__description {
 		display: block;
 		text-decoration: none;
 		color: Beige;
@@ -29,6 +29,7 @@
 		color: LightCyan;
 		margin-bottom: 5px;
 		font-size: 18px;
+		text-align: center;
 	}
 
 
@@ -43,6 +44,19 @@
 		text-align: right;
 		color: PowderBlue;
 		font-size: 16px;
+	}
+
+	&__empty {
+		text-align: center;
+		margin: 15px auto 35px;
+		color: LightCyan;
+	}
+
+	&__ghost {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto;
+		// height: 100px;
 	}
 }
 

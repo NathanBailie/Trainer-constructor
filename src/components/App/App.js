@@ -46,12 +46,13 @@ const App = () => {
 
 	const [data, setData] = useState(allData);
 	const [activeTrainer, setActiveTrainer] = useState([]);
+	const [edit, setEdit] = useState(false);
 	const amountOfTrainers = data.length;
+
 	useEffect(() => {
 		const actTrainer = data.filter(item => item.active);
 		setActiveTrainer(actTrainer);
 	}, [data]);
-
 	function onCreateItem(question, answer) {
 		return { question: question, answer: answer, id: uuid(), questionEdit: false, answerEdit: false };
 	};
@@ -66,6 +67,15 @@ const App = () => {
 		setData(newData);
 	};
 
+	function onAddNewTrainer() {
+		const newTrainer = {
+			name: 'Your new trainer', description: 'description', id: uuid(), nameEdit: false, descrEdit: false, active: false,
+			items: [],
+		};
+		const newData = [...data, newTrainer];
+		setData(newData);
+	}
+
 	function onRemoveTrainer(id) {
 		const newData = data.filter(item => item.id !== id);
 		setData(newData);
@@ -73,15 +83,15 @@ const App = () => {
 
 	function onRemoveItem(trainerId, itemId) {
 		const oldTrainer = data.filter(trainer => trainer.id === trainerId);
-		const [{ items }] = oldTrainer;
 		const oldTrainerIndex = data.findIndex(trainer => trainer.id === oldTrainer[0].id);
+		const [{ items }] = oldTrainer;
 		const newItems = items.filter(item => item.id !== itemId);
 		const newTrainer = { ...oldTrainer[0], ['items']: newItems };
 		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex) + 1];
 		setData(newData);
 	};
 
-	function onToggleItemProp(trainerId, prop, itemId) {
+	function onToggleItemProp(trainerId, prop, secondProp, itemId) {
 		const oldTrainer = data.filter(trainer => trainer.id === trainerId);
 		const oldTrainerIndex = data.findIndex(trainer => trainer.id === oldTrainer[0].id);
 		let newTrainer;
@@ -90,21 +100,20 @@ const App = () => {
 			const [{ items }] = oldTrainer;
 			const newItems = items.map(item => {
 				if (item.id === itemId) {
-					return { ...item, [prop]: true };
+					return { ...item, [prop]: true, [secondProp]: false };
 				}
-				return item;
+				return { ...item, [prop]: false, [secondProp]: false };
 			});
 			newTrainer = { ...oldTrainer[0], ['items']: newItems };
 		};
 		if (prop === 'nameEdit' || prop === 'descrEdit') {
-			newTrainer = { ...oldTrainer[0], [prop]: true };
+			newTrainer = { ...oldTrainer[0], [prop]: true, [secondProp]: false };
 		};
-		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex) + 1];
+		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
 		setData(newData);
 	};
 
 	function onChangevalue(trainerId, prop, propValue, valueEdit, itemId) {
-		console.log(prop)
 		const oldTrainer = data.filter(trainer => trainer.id === trainerId);
 		const oldTrainerIndex = data.findIndex(trainer => trainer.id === oldTrainer[0].id);
 		let newTrainer;
@@ -121,7 +130,20 @@ const App = () => {
 		if (prop === 'name' || prop === 'description') {
 			newTrainer = { ...oldTrainer[0], [prop]: propValue, [valueEdit]: false };
 		};
-		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex) + 1];
+		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
+		setData(newData);
+	}
+
+	function onChangeEdit() {
+		setEdit((v) => !v)
+	}
+
+	function onAddNewItem(activeTrainer) {
+		const oldTrainerIndex = data.findIndex(trainer => trainer.id === activeTrainer[0].id);
+		const [{ items }] = activeTrainer;
+		const newItems = [...items, onCreateItem('-/-', '-/-')];
+		const newTrainer = { ...activeTrainer[0], ['items']: newItems };
+		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
 		setData(newData);
 	}
 
@@ -130,18 +152,29 @@ const App = () => {
 		<div className="app">
 			<div className="container">
 				<div className="app__wraper">
-					<TrainerForm
-						activeTrainer={activeTrainer}
-						onRemoveItem={onRemoveItem}
-						onToggleItemProp={onToggleItemProp}
-						onChangevalue={onChangevalue} />
-					{/* <TrainersList
-						data={data}
-						onToggleProperty={onToggleProperty}
-						onRemoveTrainer={onRemoveTrainer}
-						amountOfTrainers={amountOfTrainers} />
-					<ItemList
-						activeTrainer={activeTrainer} /> */}
+					{edit ?
+						<TrainerForm
+							activeTrainer={activeTrainer}
+							onRemoveItem={onRemoveItem}
+							onToggleItemProp={onToggleItemProp}
+							onChangevalue={onChangevalue}
+							onChangeEdit={onChangeEdit}
+							onAddNewItem={onAddNewItem}
+						/>
+						:
+						<>
+							<TrainersList
+								data={data}
+								onToggleProperty={onToggleProperty}
+								onRemoveTrainer={onRemoveTrainer}
+								amountOfTrainers={amountOfTrainers}
+								onChangeEdit={onChangeEdit}
+								onAddNewTrainer={onAddNewTrainer}
+							/>
+							<ItemList
+								activeTrainer={activeTrainer} />
+						</>
+					}
 				</div>
 			</div>
 		</div>
