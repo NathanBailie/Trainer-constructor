@@ -8,16 +8,19 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 	const trnList = data.map(item => {
 		const { name, id } = item;
 		let nameClasses;
+		let trainerClasses;
 		if (item.active) {
 			nameClasses = 'trainersList__name trainersList__name_active';
+			trainerClasses = 'trainersList__trainer trainersList__trainer_active';
 		} else {
 			nameClasses = 'trainersList__name';
+			trainerClasses = 'trainersList__trainer';
 		}
 
 		return (
 			<div
 				key={name}
-				className="trainersList__trainer">
+				className={trainerClasses}>
 				<h2
 					className={nameClasses}
 					onClick={() => onToggleProperty(id, 'active')}
@@ -32,7 +35,7 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 					alt="play"
 					className='trainersList__edit'
 					title={'Edit this trainer'}
-					onClick={() => onChangeEdit()}
+					onClick={() => onChangeEdit(onToggleProperty(id, 'active'))}
 				/>
 				<img
 					src={remove}

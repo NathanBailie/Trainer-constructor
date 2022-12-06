@@ -34,8 +34,8 @@ const ItemList = ({ activeTrainer }) => {
 			const { question, answer, id } = example;
 			return (
 				<div className="itemList__item" key={id}>
-					<span className='itemList__question'>{question}?</span>
-					<span className='itemList__answer'> - {answer}</span>
+					<span className='itemList__question'>{question}</span>
+					<span className='itemList__answer'>{answer}</span>
 				</div>
 			);
 		});
@@ -45,6 +45,10 @@ const ItemList = ({ activeTrainer }) => {
 				<h3>Description</h3>
 				<p className='itemList__description'>{description}</p>
 				<h4>Some examples:</h4>
+				<div className="itemList__header">
+					<span>Question</span>
+					<span>Answer</span>
+				</div>
 				{res}
 			</div>
 		);

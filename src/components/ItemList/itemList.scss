@@ -3,15 +3,21 @@
 	width: 40%;
 	border: 1px solid Silver;
 	border-radius: 7px;
+	user-select: none;
 
-	&__item {
-		padding: 2px 0;
-	}
+
 
 	h3 {
 		color: LightCyan;
 		margin-bottom: 5px;
 		font-size: 24px;
+		text-align: center;
+	}
+
+	h4 {
+		color: LightCyan;
+		margin-bottom: 8px;
+		font-size: 18px;
 		text-align: center;
 	}
 
@@ -25,29 +31,54 @@
 		text-align: center;
 	}
 
-	h4 {
-		color: LightCyan;
-		margin-bottom: 5px;
-		font-size: 18px;
+	&__header,
+	&__item {
+		display: grid;
+		align-items: center;
 		text-align: center;
 	}
 
+	&__header {
+		grid-template: 30px / repeat(2, 50%);
+		border: 1px solid rgb(219, 219, 219);
+		border-radius: 7px;
+		margin-bottom: 5px;
 
-	&__question {
-		color: rgb(211, 202, 118);
-		font-size: 18px;
-		font-weight: bold;
+		span {
+			font-size: 18px;
+
+			&:first-child {
+				// grid-column: 0 / 1;
+				color: rgb(211, 202, 118);
+			}
+
+			&:last-child {
+				color: LightSkyBlue;
+			}
+		}
+	}
+
+	&__item {
+		grid-template: minmax(25px, auto) / repeat(2, 50%);
+		padding: 2px 0;
+	}
+
+	&__question,
+	&__answer {
+		font-size: 16px;
 		font-family: Arial;
 	}
 
+	&__question {
+		// color: rgb(211, 202, 118);
+		color: rgb(231, 226, 173);
+	}
+
 	&__answer {
-		text-align: right;
 		color: PowderBlue;
-		font-size: 16px;
 	}
 
 	&__empty {
-		text-align: center;
 		margin: 15px auto 35px;
 		color: LightCyan;
 	}

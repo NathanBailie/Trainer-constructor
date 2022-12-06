@@ -47,6 +47,7 @@ const App = () => {
 	const [data, setData] = useState(allData);
 	const [activeTrainer, setActiveTrainer] = useState([]);
 	const [edit, setEdit] = useState(false);
+	const [play, setPlay] = useState(false);
 	const amountOfTrainers = data.length;
 
 	useEffect(() => {
@@ -134,8 +135,9 @@ const App = () => {
 		setData(newData);
 	}
 
-	function onChangeEdit() {
-		setEdit((v) => !v)
+	function onChangeEdit(callback) {
+		setEdit((v) => !v);
+		return callback;
 	}
 
 	function onAddNewItem(activeTrainer) {
