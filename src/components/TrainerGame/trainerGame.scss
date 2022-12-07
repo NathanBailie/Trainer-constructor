@@ -1,0 +1,65 @@
+.trainerGame {
+	width: 300px;
+	min-height: 270px;
+	border: 1px solid LightYellow;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 15px;
+	text-align: center;
+	position: relative;
+
+	&__amount {
+		margin: 10px auto 40px;
+		color: FloralWhite;
+		font-size: 14px;
+	}
+
+	&__question {
+		margin: 0px auto 40px;
+		color: rgb(231, 226, 173);
+		font-size: 22px;
+	}
+
+	&__answer {
+		margin-bottom: 30px;
+		width: 90%;
+		border: 1px solid CornflowerBlue;
+		border-radius: 15px;
+		font-size: 14px;
+		height: 30px;
+		text-align: center;
+		background: PowderBlue;
+		box-shadow: 0px 0px 3px SkyBlue;
+		padding: 0px 15px 0px;
+
+		&:focus {
+			outline: none;
+			box-shadow: 0px 0px 3px 2px DeepSkyBlue;
+		}
+	}
+
+	&__enter {
+		padding: 4px 15px;
+		border-radius: 15px;
+		background: LightYellow;
+		transition: all 0.1s linear;
+		border: 1px outset DarkGoldenRod;
+		position: absolute;
+		bottom: 25px;
+
+		&:hover {
+			background: Cornsilk;
+			transform: scale(1.05);
+			border: 1px solid DarkGoldenRod;
+		}
+
+		&:active {
+			background: Bisque;
+			transform: scale(0.95);
+			border: 1px solid SaddleBrown;
+		}
+	}
+}

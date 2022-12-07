@@ -56,7 +56,7 @@
 		width: 500px;
 		padding-left: 10px;
 		font-size: 14px;
-		border-radius: 7px;
+		border-radius: 15px;
 		border: none;
 		margin: 0 auto 5px;
 		display: block;
@@ -218,7 +218,7 @@
 		height: 30px;
 		padding: 0px 10px 0px;
 		font-size: 14px;
-		border-radius: 7px;
+		border-radius: 15px;
 		border: none;
 		width: 100%;
 		display: flex;
@@ -232,18 +232,20 @@
 		box-shadow: 0px 0px 3px NavajoWhite;
 
 		&:focus {
-			outline: solid Peru 2px;
+			// outline: solid Peru 2px;
+			outline: none;
 			box-shadow: 0px 0px 3px 2px Chocolate;
 		}
 	}
 
 	&__answerInput {
-		background: PaleTurquoise;
-		box-shadow: 0px 0px 3px DeepSkyBlue;
+		background: PowderBlue;
+		box-shadow: 0px 0px 3px SkyBlue;
 
 		&:focus {
-			outline: solid DodgerBlue 2px;
-			box-shadow: 0px 0px 3px 2px DodgerBlue;
+			// outline: solid DeepSkyBlue 2px;
+			outline: none;
+			box-shadow: 0px 0px 3px 2px DeepSkyBlue;
 		}
 	}
 

@@ -2,6 +2,7 @@ import './app.scss';
 import TrainersList from '../TrainersList';
 import ItemList from '../ItemList';
 import TrainerForm from '../TrainerForm';
+import TrainerGame from '../TrainerGame';
 import uuid from 'react-uuid';
 import { useState, useEffect } from 'react';
 
@@ -45,15 +46,16 @@ const App = () => {
 	];
 
 	const [data, setData] = useState(allData);
-	const [activeTrainer, setActiveTrainer] = useState([]);
+	const [activeTrainer, setActiveTrainer] = useState(data.filter(item => item.active));
 	const [edit, setEdit] = useState(false);
 	const [play, setPlay] = useState(false);
 	const amountOfTrainers = data.length;
 
-	useEffect(() => {
-		const actTrainer = data.filter(item => item.active);
-		setActiveTrainer(actTrainer);
-	}, [data]);
+	// useEffect(() => {
+	// 	const actTrainer = data.filter(item => item.active);
+	// 	setActiveTrainer(actTrainer);
+	// }, [data]);
+
 	function onCreateItem(question, answer) {
 		return { question: question, answer: answer, id: uuid(), questionEdit: false, answerEdit: false };
 	};
@@ -154,7 +156,7 @@ const App = () => {
 		<div className="app">
 			<div className="container">
 				<div className="app__wraper">
-					{edit ?
+					{/* {edit ?
 						<TrainerForm
 							activeTrainer={activeTrainer}
 							onRemoveItem={onRemoveItem}
@@ -176,7 +178,9 @@ const App = () => {
 							<ItemList
 								activeTrainer={activeTrainer} />
 						</>
-					}
+					} */}
+					<TrainerGame
+						activeTrainer={activeTrainer} />
 				</div>
 			</div>
 		</div>
