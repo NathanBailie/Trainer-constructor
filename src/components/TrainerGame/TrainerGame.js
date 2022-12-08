@@ -14,6 +14,13 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 	const onKeyDown = e => {
 		if (e.code === 'Enter') console.log('enter was pressed');
 	}
+	const closeButton = (<button
+		className='trainerGame__close'
+		title="Go back to the main page"
+		onClick={() => setPlay(false)}
+	>
+		<img src={close} alt="close" />
+	</button>)
 
 	useEffect(() => {
 		// createData();
@@ -75,13 +82,7 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 						<span>&#10144;</span>
 					</div>
 				</button>
-				<button
-					className='trainerGame__close'
-					title="Go back to the main page"
-					onClick={() => setPlay(false)}
-				>
-					<img src={close} alt="close" />
-				</button>
+				{closeButton}
 			</div>
 		)
 	}
@@ -99,6 +100,7 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 				<button
 					onClick={() => onChangeQuestion(items, randomKeys, length)}
 					className='trainerGame__enter'>Enter</button>
+				{closeButton}
 			</div>
 		);
 	}
@@ -107,7 +109,6 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 			<div className="trainerGame trainerGame_finished">
 				<p className='trainerGame__mistakes'>Mistakes = <span>{mistakes}</span>
 				</p>
-
 				<button
 					className='trainerGame__enter trainerGame__enter_finished'
 					onClick={() => {
@@ -117,6 +118,7 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 						setMistakes(0);
 					}}
 				>Restart</button>
+				{closeButton}
 			</div>
 		)
 	}

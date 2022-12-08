@@ -21,17 +21,17 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 			<div
 				key={name}
 				className={trainerClasses}
-				onClick={() => onToggleProperty(id, 'active')}
 			>
 				<h2
 					className={nameClasses}
+					onClick={() => onToggleProperty(id, 'active')}
 				>{name}</h2>
 				<img
 					src={play}
 					alt="play"
 					className='trainersList__start'
 					title={'Start training'}
-					onClick={() => setPlay(true)} />
+					onClick={() => { onToggleProperty(id, 'active'); setPlay(true) }} />
 				<img
 					src={edit}
 					alt="play"

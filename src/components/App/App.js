@@ -55,7 +55,6 @@ const App = () => {
 		const actTrainer = data.filter(item => item.active);
 		setActiveTrainer(actTrainer);
 	}, [data]);
-	console.log(activeTrainer)
 
 	function onCreateItem(question, answer) {
 		return { question: question, answer: answer, id: uuid(), questionEdit: false, answerEdit: false };
