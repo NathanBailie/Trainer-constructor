@@ -4,7 +4,7 @@ import edit from './icons/edit.png';
 import remove from './icons/remove.png';
 import add from './icons/add.png';
 
-const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainers, onChangeEdit, onAddNewTrainer }) => {
+const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainers, onChangeEdit, onAddNewTrainer, setPlay }) => {
 	const trnList = data.map(item => {
 		const { name, id } = item;
 		let nameClasses;
@@ -20,16 +20,18 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 		return (
 			<div
 				key={name}
-				className={trainerClasses}>
+				className={trainerClasses}
+				onClick={() => onToggleProperty(id, 'active')}
+			>
 				<h2
 					className={nameClasses}
-					onClick={() => onToggleProperty(id, 'active')}
 				>{name}</h2>
 				<img
 					src={play}
 					alt="play"
 					className='trainersList__start'
-					title={'Start training'} />
+					title={'Start training'}
+					onClick={() => setPlay(true)} />
 				<img
 					src={edit}
 					alt="play"

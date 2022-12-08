@@ -1,7 +1,8 @@
 import './trainerGame.scss';
+import close from './close.png';
 import { useState, useEffect } from 'react';
 
-const TrainerGame = ({ activeTrainer }) => {
+const TrainerGame = ({ activeTrainer, setPlay }) => {
 	const [question, setQuestion] = useState('');
 	const [answer, setAnswer] = useState('');
 	const [randomKeys, setRandomKeys] = useState([]);
@@ -14,11 +15,18 @@ const TrainerGame = ({ activeTrainer }) => {
 		if (e.code === 'Enter') console.log('enter was pressed');
 	}
 
-	// useEffect(() => {
-	// 	// createData();
-	// }, [activeTrainer, question]);
+	useEffect(() => {
+		// createData();
+		return () => {
+			setProcess('waiting');
+			setCounter(0);
+			setAnswer('');
+			setMistakes(0);
+		}
+	}, []);
 
 	function onCreateItems() {
+		setCounter(0);
 		const [{ items }] = activeTrainer;
 		setItems(items);
 		setLength(items.length);
@@ -53,25 +61,36 @@ const TrainerGame = ({ activeTrainer }) => {
 
 	if (process === 'waiting') {
 		return (
-			<div className="trainerGame">
-				<p>Just type the correct answer and press enter to go to the next question</p>
+			<div className="trainerGame trainerGame_waiting">
+				<p className="trainerGame__description">Just type your answer in the input and press 'Enter' key on your keyboard or Enter button on the screen to continue</p>
 				<button
-					className='trainerGame__enter'
+					className='trainerGame__enter trainerGame__enter_waiting'
 					onClick={() => {
 						setProcess('playing');
-						onCreateItems()
+						onCreateItems();
 					}}
-				>Start</button>
+				>
+					<div>
+						<span>Start</span>
+						<span>&#10144;</span>
+					</div>
+				</button>
+				<button
+					className='trainerGame__close'
+					title="Go back to the main page"
+					onClick={() => setPlay(false)}
+				>
+					<img src={close} alt="close" />
+				</button>
 			</div>
 		)
 	}
 	if (process === 'playing') {
 		return (
-			<div className="trainerGame">
+			<div className="trainerGame trainerGame_playing">
 				<p className="trainerGame__amount">{(`Question ${counter} of ${length}`)}</p>
 				<p className="trainerGame__question">{question}</p>
 				<input
-					// onKeyDown={ev => ev.key === 'Enter' => { onChangeQuestion(items, randomKeys, length); setAnswer('') }}
 					onKeyDown={(e) => { e.key === 'Enter' && onChangeQuestion(items, randomKeys, length) }}
 					value={answer}
 					className="trainerGame__answer"
@@ -85,16 +104,19 @@ const TrainerGame = ({ activeTrainer }) => {
 	}
 	if (process === 'finished') {
 		return (
-			<div className="trainerGame">
-				<p className='trainerGame__mistakes'>Mistakes = {mistakes}</p>
+			<div className="trainerGame trainerGame_finished">
+				<p className='trainerGame__mistakes'>Mistakes = <span>{mistakes}</span>
+				</p>
 
 				<button
-					className='trainerGame__enter'
+					className='trainerGame__enter trainerGame__enter_finished'
 					onClick={() => {
-						setProcess('playing');
-						onCreateItems()
+						setProcess('waiting');
+						onCreateItems();
+						setAnswer('');
+						setMistakes(0);
 					}}
-				>Start</button>
+				>Restart</button>
 			</div>
 		)
 	}

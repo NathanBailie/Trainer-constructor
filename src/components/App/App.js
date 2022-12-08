@@ -51,10 +51,11 @@ const App = () => {
 	const [play, setPlay] = useState(false);
 	const amountOfTrainers = data.length;
 
-	// useEffect(() => {
-	// 	const actTrainer = data.filter(item => item.active);
-	// 	setActiveTrainer(actTrainer);
-	// }, [data]);
+	useEffect(() => {
+		const actTrainer = data.filter(item => item.active);
+		setActiveTrainer(actTrainer);
+	}, [data]);
+	console.log(activeTrainer)
 
 	function onCreateItem(question, answer) {
 		return { question: question, answer: answer, id: uuid(), questionEdit: false, answerEdit: false };
@@ -156,7 +157,8 @@ const App = () => {
 		<div className="app">
 			<div className="container">
 				<div className="app__wraper">
-					{/* {edit ?
+
+					{(edit && !play) &&
 						<TrainerForm
 							activeTrainer={activeTrainer}
 							onRemoveItem={onRemoveItem}
@@ -164,8 +166,9 @@ const App = () => {
 							onChangevalue={onChangevalue}
 							onChangeEdit={onChangeEdit}
 							onAddNewItem={onAddNewItem}
-						/>
-						:
+						/>}
+					:
+					{(!edit && !play) &&
 						<>
 							<TrainersList
 								data={data}
@@ -174,13 +177,17 @@ const App = () => {
 								amountOfTrainers={amountOfTrainers}
 								onChangeEdit={onChangeEdit}
 								onAddNewTrainer={onAddNewTrainer}
+								setPlay={setPlay}
 							/>
 							<ItemList
 								activeTrainer={activeTrainer} />
 						</>
-					} */}
-					<TrainerGame
-						activeTrainer={activeTrainer} />
+					}
+					{(!edit && play) &&
+						<TrainerGame
+							activeTrainer={activeTrainer}
+							setPlay={setPlay} />}
+
 				</div>
 			</div>
 		</div>

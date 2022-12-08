@@ -1,7 +1,6 @@
 .trainerGame {
 	width: 300px;
 	min-height: 270px;
-	border: 1px solid LightYellow;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -10,56 +9,201 @@
 	padding: 15px;
 	text-align: center;
 	position: relative;
+	border-radius: 15px;
+	transition: all 0.1s linear;
+
+	&_waiting {
+		border: none;
+		box-shadow: 0px 0px 3px 1px beige inset, 0px 0px 3px 1px AntiqueWhite;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&_playing {
+		border: none;
+		box-shadow: 0px 0px 3px 1px white inset, 0px 0px 3px 1px AliceBlue;
+	}
+
+	&_finished {
+		border: none;
+		border: none;
+		box-shadow: 0px 0px 3px 1px rgb(223, 223, 188) inset, 0px 0px 3px 1px rgb(223, 146, 45);
+	}
 
 	&__amount {
-		margin: 10px auto 40px;
+		margin: 10px auto 50px;
 		color: FloralWhite;
 		font-size: 14px;
 	}
 
 	&__question {
-		margin: 0px auto 40px;
+		margin: 0px auto 50px;
 		color: rgb(231, 226, 173);
 		font-size: 22px;
 	}
 
 	&__answer {
 		margin-bottom: 30px;
-		width: 90%;
-		border: 1px solid CornflowerBlue;
+		width: 65%;
+		border: none;
 		border-radius: 15px;
 		font-size: 14px;
 		height: 30px;
 		text-align: center;
-		background: PowderBlue;
-		box-shadow: 0px 0px 3px SkyBlue;
+		box-shadow: 0px 0px 3px 1px Lavender;
 		padding: 0px 15px 0px;
 
 		&:focus {
 			outline: none;
-			box-shadow: 0px 0px 3px 2px DeepSkyBlue;
+			box-shadow: 0px 0px 3px 1px Aquamarine inset, 0px 0px 5px 2px SkyBlue;
+			background: rgb(239, 253, 253);
 		}
 	}
 
 	&__enter {
-		padding: 4px 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		width: 60px;
+		height: 25px;
+		border: 1px solid DarkGoldenRod;
 		border-radius: 15px;
 		background: LightYellow;
-		transition: all 0.1s linear;
-		border: 1px outset DarkGoldenRod;
-		position: absolute;
 		bottom: 25px;
+		transition: all 0.1s linear;
+		font-size: 14px;
+		cursor: pointer;
+		user-select: none;
 
 		&:hover {
 			background: Cornsilk;
-			transform: scale(1.05);
+			transform: scale(1.03);
 			border: 1px solid DarkGoldenRod;
 		}
 
 		&:active {
 			background: Bisque;
-			transform: scale(0.95);
+			transform: scale(0.97);
 			border: 1px solid SaddleBrown;
+		}
+
+		&_waiting {
+			position: relative;
+			bottom: 0px;
+			overflow: hidden;
+
+
+			&:hover {
+				border: none;
+				box-shadow: 0px 0px 2px 2px DarkGoldenRod;
+			}
+
+			&:active {
+				background: LightYellow;
+				border: none;
+				box-shadow: 0px 0px 2px 2px DarkGoldenRod;
+			}
+
+			div {
+				transform: translate(30px);
+				position: absolute;
+				width: 120px;
+				height: 25px;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				transition: all 0.3s ease;
+
+				&:hover {
+					transform: translate(-30px);
+				}
+
+				span {
+					width: 60px;
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 15px;
+
+					// &:first-child {}
+
+					&:last-child {
+						font-size: 30px;
+						line-height: 5px;
+						padding-left: 3px;
+						color: DarkGoldenRod;
+						background: Wheat;
+
+						&:active {
+							color: rgb(167, 124, 18);
+						}
+					}
+				}
+			}
+		}
+
+		&_finished {
+			width: 70px;
+			// background: PaleGoldenrod;
+			background: radial-gradient(gold, Goldenrod);
+			border: none;
+
+			&:hover {
+				background: radial-gradient(gold, Goldenrod);
+				transform: scale(1.05);
+				border: 1px solid DarkGoldenRod;
+			}
+
+			&:active {
+				background: radial-gradient(Peru, Goldenrod);
+				transform: scale(0.95);
+			}
+		}
+	}
+
+	&__description {
+		width: 90%;
+		color: Azure;
+		margin-bottom: 20px;
+		user-select: none;
+		margin-top: 20px;
+	}
+
+	&__mistakes {
+		position: absolute;
+		top: 40%;
+		color: Azure;
+		font-size: 20px;
+
+		span {
+			color: tomato;
+		}
+	}
+
+	&__close {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		width: 35px;
+		height: 35px;
+		border: none;
+		user-select: none;
+		cursor: pointer;
+
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&:hover {
+			transform: scale(1.1);
+		}
+
+		&:active {
+			transform: scale(0.97);
 		}
 	}
 }
