@@ -56,7 +56,7 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 				<button
 					onClick={() => onAddNewTrainer()}>
 					<div>
-						<span>Add new</span>
+						<span>Add new trainer</span>
 						<img src={add} alt="add" />
 					</div>
 				</button>

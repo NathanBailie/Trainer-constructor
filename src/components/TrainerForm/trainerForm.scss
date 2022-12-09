@@ -323,4 +323,28 @@
 			color: white;
 		}
 	}
+
+	&__close {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+		width: 35px;
+		height: 35px;
+		border: none;
+		user-select: none;
+		cursor: pointer;
+
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&:hover {
+			transform: scale(1.1);
+		}
+
+		&:active {
+			transform: scale(0.97);
+		}
+	}
 }

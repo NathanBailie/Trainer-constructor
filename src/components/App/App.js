@@ -6,6 +6,8 @@ import TrainerGame from '../TrainerGame';
 import uuid from 'react-uuid';
 import { useState, useEffect } from 'react';
 
+import Timer from '../Timer';
+
 const App = () => {
 	const allData = [
 		{
@@ -157,7 +159,7 @@ const App = () => {
 			<div className="container">
 				<div className="app__wraper">
 
-					{(edit && !play) &&
+					{/* {(edit && !play) &&
 						<TrainerForm
 							activeTrainer={activeTrainer}
 							onRemoveItem={onRemoveItem}
@@ -165,6 +167,7 @@ const App = () => {
 							onChangevalue={onChangevalue}
 							onChangeEdit={onChangeEdit}
 							onAddNewItem={onAddNewItem}
+							setEdit={setEdit}
 						/>}
 					:
 					{(!edit && !play) &&
@@ -185,8 +188,9 @@ const App = () => {
 					{(!edit && play) &&
 						<TrainerGame
 							activeTrainer={activeTrainer}
-							setPlay={setPlay} />}
+							setPlay={setPlay} />} */}
 
+					<Timer />
 				</div>
 			</div>
 		</div>

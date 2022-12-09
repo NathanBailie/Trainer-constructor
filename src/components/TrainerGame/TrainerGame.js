@@ -1,5 +1,7 @@
 import './trainerGame.scss';
 import close from './close.png';
+import unchecked from './unchecked.png';
+import checked from './checked.png';
 import { useState, useEffect } from 'react';
 
 const TrainerGame = ({ activeTrainer, setPlay }) => {
@@ -11,19 +13,42 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 	const [length, setLength] = useState(0);
 	const [process, setProcess] = useState('waiting');
 	const [mistakes, setMistakes] = useState(0);
-	const onKeyDown = e => {
-		if (e.code === 'Enter') console.log('enter was pressed');
-	}
+	const [mistake, setMistake] = useState(false);
+	const [boxChecked, setboxChecked] = useState(true);
+	const [seconds, setSeconds] = useState(10);
+	const [secondMistake, setSecondMistake] = useState(false);
+
+
 	const closeButton = (<button
 		className='trainerGame__close'
 		title="Go back to the main page"
 		onClick={() => setPlay(false)}
 	>
 		<img src={close} alt="close" />
-	</button>)
+	</button>);
+	let answerInputClasses;
+	if (mistake) {
+		answerInputClasses = 'trainerGame__answer trainerGame__answer_mistake';
+	} else {
+		answerInputClasses = 'trainerGame__answer';
+	};
+	let settingClasses;
+	if (boxChecked) {
+		settingClasses = 'trainerGame__setting trainerGame__setting_active';
+	} else {
+		settingClasses = 'trainerGame__setting';
+	}
+	let secondInputClasses;
+	let warningMessageClasses;
+	if (secondMistake) {
+		secondInputClasses = 'trainerGame__secondInput trainerGame__secondInput_active';
+		warningMessageClasses = 'trainerGame__warning trainerGame__warning_active';
+	} else {
+		secondInputClasses = 'trainerGame__secondInput ';
+		warningMessageClasses = 'trainerGame__warning';
+	}
 
 	useEffect(() => {
-		// createData();
 		return () => {
 			setProcess('waiting');
 			setCounter(0);
@@ -52,33 +77,67 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 
 	function onChangeQuestion(items, randomKeys, length) {
 		if (counter === length - 1) {
-			console.log('finished')
 			setProcess('finished');
 			return;
 		}
 		if (items[randomKeys[counter]]['answer'] !== answer) {
 			setMistakes((m) => m + 1);
+			setMistake(true);
 			return;
 		} else {
 			setCounter(counter + 1);
 			setQuestion(items[randomKeys[counter + 1]]['question']);
 			setAnswer('');
+			setMistake(false);
 		}
 	}
+
+	function onValidateTime(seconds) {
+		if (/^\d+$/.test(seconds) && boxChecked || !boxChecked) {
+			setProcess('playing');
+			onCreateItems();
+			setSecondMistake(false);
+		} else {
+			setSecondMistake(true);
+			return;
+		}
+	}
+
+
 
 	if (process === 'waiting') {
 		return (
 			<div className="trainerGame trainerGame_waiting">
 				<p className="trainerGame__description">Just type your answer in the input and press 'Enter' key on your keyboard or Enter button on the screen to continue</p>
+				<div className="trainerGame__timerSetting">
+					<div className="trainerGame__checkbox">
+						<span
+							onClick={() => setboxChecked((c) => !c)}
+						>Timer</span>
+						<img
+							src={boxChecked ? checked : unchecked}
+							onClick={() => setboxChecked((c) => !c)}
+							alt="unchecked" />
+					</div>
+					<div className={settingClasses}>
+						<span>sec / per question -</span>
+						<input
+							className={secondInputClasses}
+							value={seconds}
+							placeholder="sec"
+							onChange={(e) => setSeconds(Number(e.target.value))} />
+					</div>
+					<p className={warningMessageClasses}>please, type the correct number</p>
+				</div>
 				<button
 					className='trainerGame__enter trainerGame__enter_waiting'
 					onClick={() => {
-						setProcess('playing');
-						onCreateItems();
-					}}
-				>
+						onValidateTime(seconds);
+						setSeconds((s) => s * length);
+					}}>
 					<div>
-						<span>Start</span>
+						<span
+						>Start</span>
 						<span>&#10144;</span>
 					</div>
 				</button>
@@ -90,11 +149,13 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 		return (
 			<div className="trainerGame trainerGame_playing">
 				<p className="trainerGame__amount">{(`Question ${counter} of ${length}`)}</p>
+
+				{/* <p className='trainerGame__timer'>{seconds}</p> */}
 				<p className="trainerGame__question">{question}</p>
 				<input
 					onKeyDown={(e) => { e.key === 'Enter' && onChangeQuestion(items, randomKeys, length) }}
 					value={answer}
-					className="trainerGame__answer"
+					className={answerInputClasses}
 					placeholder='type your answer'
 					onChange={(e) => setAnswer(e.target.value)} />
 				<button

@@ -17,7 +17,6 @@
 		box-shadow: 0px 0px 3px 1px beige inset, 0px 0px 3px 1px AntiqueWhite;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 	}
 
 	&_playing {
@@ -35,12 +34,14 @@
 		margin: 10px auto 50px;
 		color: FloralWhite;
 		font-size: 14px;
+		user-select: none;
 	}
 
 	&__question {
 		margin: 0px auto 50px;
 		color: rgb(231, 226, 173);
 		font-size: 22px;
+		user-select: none;
 	}
 
 	&__answer {
@@ -53,11 +54,24 @@
 		text-align: center;
 		box-shadow: 0px 0px 3px 1px Lavender;
 		padding: 0px 15px 0px;
+		user-select: none;
+		transition: all 0.3s ease;
 
 		&:focus {
 			outline: none;
 			box-shadow: 0px 0px 3px 1px Aquamarine inset, 0px 0px 5px 2px SkyBlue;
 			background: rgb(239, 253, 253);
+		}
+
+		&_mistake {
+			border: 1px solid tomato;
+			box-shadow: 0px 0px 4px 2px IndianRed;
+
+			&:focus {
+				border: none;
+				box-shadow: 0px 0px 5px 2px DarkSalmon;
+				background: rgb(243, 229, 243);
+			}
 		}
 	}
 
@@ -90,8 +104,6 @@
 		}
 
 		&_waiting {
-			position: relative;
-			bottom: 0px;
 			overflow: hidden;
 
 
@@ -167,9 +179,8 @@
 	&__description {
 		width: 90%;
 		color: Azure;
-		margin-bottom: 20px;
+		margin: 50px auto 25px;
 		user-select: none;
-		margin-top: 20px;
 	}
 
 	&__mistakes {
@@ -204,6 +215,112 @@
 
 		&:active {
 			transform: scale(0.97);
+		}
+	}
+
+	&__timerSetting {
+		padding: 2px 0px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		top: 15px;
+		left: 25px;
+		user-select: none;
+		margin-bottom: 45px;
+
+		span {
+			color: azure;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+	}
+
+	&__checkbox {
+		display: flex;
+		cursor: pointer;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 3px;
+
+		img {
+			width: 22px;
+			height: 22px;
+		}
+	}
+
+	&__setting {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 0.5s ease;
+		margin-bottom: 3px;
+
+		span {
+			color: grey;
+			margin-right: 6px;
+			cursor: pointer;
+			font-style: italic;
+			font-size: 14px;
+			text-decoration: line-through;
+		}
+
+		&_active {
+			span {
+				text-decoration: none;
+				color: rgb(219, 223, 223);
+			}
+
+			input {
+				background: Azure;
+			}
+		}
+	}
+
+	&__secondInput {
+		border: 1px solid grey;
+		border: none;
+		border-radius: 7px;
+		height: 20px;
+		width: 50px;
+		user-select: none;
+		text-align: center;
+		font-size: 14px;
+		align-items: center;
+		background: grey;
+		box-shadow: none;
+
+		&::placeholder {
+			font-size: 12px;
+		}
+
+		&:focus {
+			outline: none;
+			border: 1px solid rgb(226, 225, 225);
+			box-shadow: 0px 0px 3px 2px Lavender;
+		}
+
+		&_active {
+			border: 1px solid tomato;
+			box-shadow: 0px 0px 3px 1px red;
+
+			&:focus {
+				border: 1px solid tomato;
+				box-shadow: 0px 0px 4px 2px IndianRed;
+
+			}
+		}
+	}
+
+	&__warning {
+		color: LightSalmon;
+		font-style: italic;
+		font-size: 14px;
+		opacity: 0;
+		transition: all 0.5s ease;
+
+		&_active {
+			opacity: 1;
 		}
 	}
 }

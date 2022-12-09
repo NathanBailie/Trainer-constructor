@@ -1,8 +1,9 @@
 import './trainerForm.scss';
+import close from './close.png';
 import remove from './remove.png';
 import { useState } from 'react';
 
-const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue, onChangeEdit, onAddNewItem }) => {
+const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue, onChangeEdit, onAddNewItem, setEdit }) => {
 	const [nameValue, setNameValue] = useState('');
 	const [descrValue, setDescrValue] = useState('');
 	const [questionValue, setQuestionvalue] = useState('');
@@ -29,7 +30,8 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 							value={questionValue}
 							onChange={(e) => setQuestionvalue(e.target.value)}
 							onBlur={() => onChangevalue(id, 'question', questionValue, 'questionEdit', item.id,)}
-							className="trainerForm__questionInput" />
+							className="trainerForm__questionInput"
+							onKeyDown={(e) => { e.key === 'Enter' && e.target.blur() }} />
 					}
 					{!answerEdit ?
 						<span
@@ -45,6 +47,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 							onChange={(e) => setAnswerValue(e.target.value)}
 							onBlur={() => onChangevalue(id, 'answer', answerValue, 'answerEdit', item.id)}
 							className="trainerForm__answerInput"
+							onKeyDown={(e) => { e.key === 'Enter' && e.target.blur() }}
 						/>
 					}
 					<span className="trainerForm__remove">
@@ -61,7 +64,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 		return (
 			<div className="trainerForm">
 				<h2 className='trainerForm__title'>Edit page</h2>
-				<h3 className='trainerForm__subtitle'>Just hover your mouse on the element your want to edit. You will see the underline. Then just click on the element</h3>
+				<h3 className='trainerForm__subtitle'>Just hover your mouse on the element you want to edit. You will see the underline. Then just click on the element</h3>
 				{!nameEdit ?
 					<h2
 						className='trainerForm__name'
@@ -77,6 +80,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						onChange={(e) => setNameValue(e.target.value)}
 						onBlur={() => onChangevalue(id, 'name', nameValue, 'nameEdit')}
 						className="trainerForm__nameInput"
+						onKeyDown={(e) => { e.key === 'Enter' && e.target.blur() }}
 					/>
 				}
 				{!descrEdit ?
@@ -94,6 +98,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 						onChange={(e) => setDescrValue(e.target.value)}
 						onBlur={() => onChangevalue(id, 'description', descrValue, 'descrEdit')}
 						className="trainerForm__descrArea"
+						onKeyDown={(e) => { e.key === 'Enter' && e.target.blur() }}
 					/>
 				}
 
@@ -114,6 +119,13 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 				<button className="trainerForm__completeButton"
 					onClick={() => onChangeEdit()}>
 					Complete
+				</button>
+				<button
+					className='trainerForm__close'
+					title="Go back to the main page"
+					onClick={() => setEdit(false)}
+				>
+					<img src={close} alt="close" />
 				</button>
 			</div>
 		);
