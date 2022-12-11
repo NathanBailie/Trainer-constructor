@@ -1,9 +1,10 @@
 import './trainerForm.scss';
-import close from './close.png';
-import remove from './remove.png';
+import close from '../../images/close.png';
+import remove from '../../images/delete.png';
 import { useState } from 'react';
 
-const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue, onChangeEdit, onAddNewItem, setEdit }) => {
+
+const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangevalue, onAddNewItem, setEdit }) => {
 	const [nameValue, setNameValue] = useState('');
 	const [descrValue, setDescrValue] = useState('');
 	const [questionValue, setQuestionvalue] = useState('');
@@ -117,7 +118,7 @@ const TrainerForm = ({ activeTrainer, onRemoveItem, onToggleItemProp, onChangeva
 					Add new question
 				</button>
 				<button className="trainerForm__completeButton"
-					onClick={() => onChangeEdit()}>
+					onClick={() => setEdit((e) => !e)}>
 					Complete
 				</button>
 				<button

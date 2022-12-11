@@ -1,10 +1,11 @@
 import './trainersList.scss';
-import play from './icons/play.png';
-import edit from './icons/edit.png';
-import remove from './icons/remove.png';
-import add from './icons/add.png';
+import play from '../../images/play.png';
+import edit from '../../images/edit.png';
+import remove from '../../images/remove.png';
+import add from '../../images/add.png';
 
-const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainers, onChangeEdit, onAddNewTrainer, setPlay }) => {
+
+const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainers, onAddNewTrainer, setPlay, setEdit }) => {
 	const trnList = data.map(item => {
 		const { name, id } = item;
 		let nameClasses;
@@ -31,13 +32,13 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 					alt="play"
 					className='trainersList__start'
 					title={'Start training'}
-					onClick={() => { onToggleProperty(id, 'active'); setPlay(true) }} />
+					onClick={() => onToggleProperty(id, 'active', setPlay, 'play')} />
 				<img
 					src={edit}
 					alt="play"
 					className='trainersList__edit'
 					title={'Edit this trainer'}
-					onClick={() => onChangeEdit(onToggleProperty(id, 'active'))}
+					onClick={() => onToggleProperty(id, 'active', setEdit((v) => !v))}
 				/>
 				<img
 					src={remove}

@@ -6,7 +6,6 @@ import TrainerGame from '../TrainerGame';
 import uuid from 'react-uuid';
 import { useState, useEffect } from 'react';
 
-import Timer from '../Timer';
 
 const App = () => {
 	const allData = [
@@ -62,7 +61,7 @@ const App = () => {
 		return { question: question, answer: answer, id: uuid(), questionEdit: false, answerEdit: false };
 	};
 
-	function onToggleProperty(id, prop) {
+	function onToggleProperty(id, prop, callback, additional) {
 		let newData = data.map(item => {
 			if (item.id === id) {
 				return { ...item, [prop]: true };
@@ -70,6 +69,15 @@ const App = () => {
 			return { ...item, [prop]: false };
 		});
 		setData(newData);
+		if (additional !== 'play') {
+			return callback;
+		} else if (additional === 'play') {
+			const item = data.filter(item => item.id === id);
+			const [{ items }] = item;
+			if (items.length > 0) {
+				return callback(true);
+			};
+		};
 	};
 
 	function onAddNewTrainer() {
@@ -79,7 +87,7 @@ const App = () => {
 		};
 		const newData = [...data, newTrainer];
 		setData(newData);
-	}
+	};
 
 	function onRemoveTrainer(id) {
 		const newData = data.filter(item => item.id !== id);
@@ -137,12 +145,7 @@ const App = () => {
 		};
 		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
 		setData(newData);
-	}
-
-	function onChangeEdit(callback) {
-		setEdit((v) => !v);
-		return callback;
-	}
+	};
 
 	function onAddNewItem(activeTrainer) {
 		const oldTrainerIndex = data.findIndex(trainer => trainer.id === activeTrainer[0].id);
@@ -151,7 +154,7 @@ const App = () => {
 		const newTrainer = { ...activeTrainer[0], ['items']: newItems };
 		const newData = [...data.slice(0, oldTrainerIndex), newTrainer, ...data.slice(oldTrainerIndex + 1)];
 		setData(newData);
-	}
+	};
 
 
 	return (
@@ -159,13 +162,12 @@ const App = () => {
 			<div className="container">
 				<div className="app__wraper">
 
-					{/* {(edit && !play) &&
+					{(edit && !play) &&
 						<TrainerForm
 							activeTrainer={activeTrainer}
 							onRemoveItem={onRemoveItem}
 							onToggleItemProp={onToggleItemProp}
 							onChangevalue={onChangevalue}
-							onChangeEdit={onChangeEdit}
 							onAddNewItem={onAddNewItem}
 							setEdit={setEdit}
 						/>}
@@ -177,9 +179,10 @@ const App = () => {
 								onToggleProperty={onToggleProperty}
 								onRemoveTrainer={onRemoveTrainer}
 								amountOfTrainers={amountOfTrainers}
-								onChangeEdit={onChangeEdit}
+								setEdit={setEdit}
 								onAddNewTrainer={onAddNewTrainer}
 								setPlay={setPlay}
+								activeTrainer={activeTrainer}
 							/>
 							<ItemList
 								activeTrainer={activeTrainer} />
@@ -188,9 +191,8 @@ const App = () => {
 					{(!edit && play) &&
 						<TrainerGame
 							activeTrainer={activeTrainer}
-							setPlay={setPlay} />} */}
+							setPlay={setPlay} />}
 
-					<Timer />
 				</div>
 			</div>
 		</div>

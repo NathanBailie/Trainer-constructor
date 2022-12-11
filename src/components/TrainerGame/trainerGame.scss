@@ -28,10 +28,16 @@
 		border: none;
 		border: none;
 		box-shadow: 0px 0px 3px 1px rgb(223, 223, 188) inset, 0px 0px 3px 1px rgb(223, 146, 45);
+
+		h2 {
+			color: OrangeRed;
+			text-align: center;
+			margin-top: 70px;
+		}
 	}
 
 	&__amount {
-		margin: 10px auto 50px;
+		margin: 10px auto 60px;
 		color: FloralWhite;
 		font-size: 14px;
 		user-select: none;
@@ -185,7 +191,7 @@
 
 	&__mistakes {
 		position: absolute;
-		top: 40%;
+		top: 43%;
 		color: Azure;
 		font-size: 20px;
 
@@ -198,8 +204,8 @@
 		position: absolute;
 		top: 15px;
 		right: 15px;
-		width: 35px;
-		height: 35px;
+		width: 30px;
+		height: 30px;
 		border: none;
 		user-select: none;
 		cursor: pointer;
@@ -322,5 +328,10 @@
 		&_active {
 			opacity: 1;
 		}
+	}
+
+	&__timerWraper {
+		position: absolute;
+		top: 45px;
 	}
 }

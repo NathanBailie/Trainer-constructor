@@ -1,26 +1,32 @@
 import './timer.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const Timer = () => {
-	const allseconds = 2;
-	let min = Math.floor(allseconds / 60);
-	let ses = allseconds - Math.floor(allseconds / 60) * 60;
+
+const Timer = ({ allSeconds, setProcess }) => {
+	let min = Math.floor(allSeconds / 60);
+	let ses = allSeconds - Math.floor(allSeconds / 60) * 60;
 	const [minutes, setMinutes] = useState(min);
 	const [seconds, setSeconds] = useState(ses);
-	const [finish, setFinish] = useState();
-
+	const timerID = useRef();
 
 	useEffect(() => {
-		const timerID = setInterval(() => timer(), 1000);
-		return () => clearInterval(timerID);
+		timerID.current = setInterval(() => tick(), 1000)
 	}, []);
 
-	const timer = () => {
+	useEffect(() => {
+		if (minutes === 0 && seconds === 0) {
+			clearInterval(timerID.current);
+			setProcess('finished');
+		} else if (minutes !== 0 && seconds === 0) {
+			setSeconds(59);
+			setMinutes((m) => m - 1)
+		}
 
-	}
+	}, [seconds]);
 
-
-
+	function tick() {
+		setSeconds((s) => s - 1)
+	};
 
 	return (
 		<div className="timer">

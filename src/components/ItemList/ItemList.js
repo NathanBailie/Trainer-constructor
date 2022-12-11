@@ -1,6 +1,7 @@
 import './itemList.scss';
-import ghost from './ghost.gif';
+import ghost from '../../images/ghost.gif';
 import Spinner from '../Spinner';
+
 
 const ItemList = ({ activeTrainer }) => {
 	if (activeTrainer.length === 0) {
@@ -58,11 +59,8 @@ const ItemList = ({ activeTrainer }) => {
 				<h2 className='itemList__empty'>There are not any questions in this trainer!</h2>
 				<img src={ghost} alt="ghost" className='itemList__ghost' />
 			</div>
-		)
-	}
-
-
-
+		);
+	};
 };
 
 export default ItemList;

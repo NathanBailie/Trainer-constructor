@@ -1,8 +1,10 @@
 import './trainerGame.scss';
-import close from './close.png';
-import unchecked from './unchecked.png';
-import checked from './checked.png';
+import close from '../../images/cancel.png';
+import unchecked from '../../images/unchecked.png';
+import checked from '../../images/checked.png';
+import Timer from '../Timer';
 import { useState, useEffect } from 'react';
+
 
 const TrainerGame = ({ activeTrainer, setPlay }) => {
 	const [question, setQuestion] = useState('');
@@ -15,9 +17,10 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 	const [mistakes, setMistakes] = useState(0);
 	const [mistake, setMistake] = useState(false);
 	const [boxChecked, setboxChecked] = useState(true);
-	const [seconds, setSeconds] = useState(10);
+	const [secPerQuest, setSecPerQuest] = useState(10);
+	const [allSeconds, setAllSeconds] = useState(300);
 	const [secondMistake, setSecondMistake] = useState(false);
-
+	const [timeLeft, setTimeLeft] = useState(false);
 
 	const closeButton = (<button
 		className='trainerGame__close'
@@ -26,18 +29,21 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 	>
 		<img src={close} alt="close" />
 	</button>);
+
 	let answerInputClasses;
 	if (mistake) {
 		answerInputClasses = 'trainerGame__answer trainerGame__answer_mistake';
 	} else {
 		answerInputClasses = 'trainerGame__answer';
 	};
+
 	let settingClasses;
 	if (boxChecked) {
 		settingClasses = 'trainerGame__setting trainerGame__setting_active';
 	} else {
 		settingClasses = 'trainerGame__setting';
-	}
+	};
+
 	let secondInputClasses;
 	let warningMessageClasses;
 	if (secondMistake) {
@@ -46,9 +52,10 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 	} else {
 		secondInputClasses = 'trainerGame__secondInput ';
 		warningMessageClasses = 'trainerGame__warning';
-	}
+	};
 
 	useEffect(() => {
+		onCreateItems();
 		return () => {
 			setProcess('waiting');
 			setCounter(0);
@@ -69,17 +76,17 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 		const rndKeys = [...set];
 		setRandomKeys(rndKeys);
 		setQuestion(items[rndKeys[counter]]['question']);
-	}
+	};
 
 	function getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
+	};
 
 	function onChangeQuestion(items, randomKeys, length) {
 		if (counter === length - 1) {
 			setProcess('finished');
 			return;
-		}
+		};
 		if (items[randomKeys[counter]]['answer'] !== answer) {
 			setMistakes((m) => m + 1);
 			setMistake(true);
@@ -89,21 +96,21 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 			setQuestion(items[randomKeys[counter + 1]]['question']);
 			setAnswer('');
 			setMistake(false);
-		}
-	}
+		};
+	};
 
 	function onValidateTime(seconds) {
 		if (/^\d+$/.test(seconds) && boxChecked || !boxChecked) {
 			setProcess('playing');
 			onCreateItems();
 			setSecondMistake(false);
+			setAllSeconds(secPerQuest * length);
+			console.log(length)
 		} else {
 			setSecondMistake(true);
 			return;
-		}
-	}
-
-
+		};
+	};
 
 	if (process === 'waiting') {
 		return (
@@ -123,17 +130,16 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 						<span>sec / per question -</span>
 						<input
 							className={secondInputClasses}
-							value={seconds}
+							value={secPerQuest}
 							placeholder="sec"
-							onChange={(e) => setSeconds(Number(e.target.value))} />
+							onChange={(e) => setSecPerQuest(Number(e.target.value))} />
 					</div>
 					<p className={warningMessageClasses}>please, type the correct number</p>
 				</div>
 				<button
 					className='trainerGame__enter trainerGame__enter_waiting'
 					onClick={() => {
-						onValidateTime(seconds);
-						setSeconds((s) => s * length);
+						onValidateTime(secPerQuest);
 					}}>
 					<div>
 						<span
@@ -143,14 +149,20 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 				</button>
 				{closeButton}
 			</div>
-		)
-	}
+		);
+	};
+
 	if (process === 'playing') {
 		return (
 			<div className="trainerGame trainerGame_playing">
 				<p className="trainerGame__amount">{(`Question ${counter} of ${length}`)}</p>
-
-				{/* <p className='trainerGame__timer'>{seconds}</p> */}
+				{boxChecked &&
+					<div className="trainerGame__timerWraper">
+						<Timer
+							allSeconds={allSeconds}
+							setProcess={setProcess} />
+					</div>
+				}
 				<p className="trainerGame__question">{question}</p>
 				<input
 					onKeyDown={(e) => { e.key === 'Enter' && onChangeQuestion(items, randomKeys, length) }}
@@ -164,10 +176,14 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 				{closeButton}
 			</div>
 		);
-	}
+	};
+
 	if (process === 'finished') {
 		return (
 			<div className="trainerGame trainerGame_finished">
+				{timeLeft &&
+					<h2>Time is over!</h2>
+				}
 				<p className='trainerGame__mistakes'>Mistakes = <span>{mistakes}</span>
 				</p>
 				<button
@@ -181,8 +197,8 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 				>Restart</button>
 				{closeButton}
 			</div>
-		)
-	}
+		);
+	};
 };
 
 export default TrainerGame;
