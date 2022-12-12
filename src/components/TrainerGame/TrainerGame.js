@@ -132,7 +132,7 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 							className={secondInputClasses}
 							value={secPerQuest}
 							placeholder="sec"
-							onChange={(e) => setSecPerQuest(Number(e.target.value))} />
+							onChange={(e) => setSecPerQuest(e.target.value)} />
 					</div>
 					<p className={warningMessageClasses}>please, type the correct number</p>
 				</div>
