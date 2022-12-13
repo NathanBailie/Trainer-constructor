@@ -171,7 +171,6 @@ const App = () => {
 							onAddNewItem={onAddNewItem}
 							setEdit={setEdit}
 						/>}
-					:
 					{(!edit && !play) &&
 						<>
 							<TrainersList
