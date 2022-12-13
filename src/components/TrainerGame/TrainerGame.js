@@ -62,11 +62,14 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 			setAnswer('');
 			setMistakes(0);
 		}
-	}, []);
+	}, [activeTrainer]);
 
 	function onCreateItems() {
 		setCounter(0);
 		const [{ items }] = activeTrainer;
+		if (items.length === 0) {
+			return;
+		}
 		setItems(items);
 		setLength(items.length);
 		const set = new Set([]);
@@ -105,7 +108,6 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 			onCreateItems();
 			setSecondMistake(false);
 			setAllSeconds(secPerQuest * length);
-			console.log(length)
 		} else {
 			setSecondMistake(true);
 			return;
