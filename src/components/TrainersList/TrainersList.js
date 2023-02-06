@@ -16,7 +16,7 @@ const TrainersList = ({ data, onToggleProperty, onRemoveTrainer, amountOfTrainer
 		} else {
 			nameClasses = 'trainersList__name';
 			trainerClasses = 'trainersList__trainer';
-		}
+		};
 
 		return (
 			<div

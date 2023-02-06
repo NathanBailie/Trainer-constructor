@@ -69,7 +69,7 @@ const TrainerGame = ({ activeTrainer, setPlay }) => {
 		const [{ items }] = activeTrainer;
 		if (items.length === 0) {
 			return;
-		}
+		};
 		setItems(items);
 		setLength(items.length);
 		const set = new Set([]);

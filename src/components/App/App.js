@@ -135,7 +135,7 @@ const App = () => {
 			const newItems = items.map(item => {
 				if (item.id === itemId) {
 					return { ...item, [prop]: propValue, [valueEdit]: false };
-				}
+				};
 				return item;
 			});
 			newTrainer = { ...oldTrainer[0], ['items']: newItems };

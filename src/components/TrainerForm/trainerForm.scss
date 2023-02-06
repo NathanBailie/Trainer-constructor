@@ -65,6 +65,7 @@
 	&__nameInput {
 		background: LavenderBlush;
 		box-shadow: 0px 0px 3px Gainsboro;
+		text-align: center;
 
 		&:focus {
 			outline: solid DarkGrey 2px;
@@ -77,6 +78,7 @@
 		box-shadow: 0px 0px 3px Beige;
 		resize: none;
 		height: 100px;
+		text-align: center;
 
 		&:focus {
 			outline: solid Gray 2px;
@@ -225,6 +227,7 @@
 		justify-content: center;
 		align-items: center;
 		vertical-align: center;
+		text-align: center;
 	}
 
 	&__questionInput {
@@ -232,7 +235,6 @@
 		box-shadow: 0px 0px 3px NavajoWhite;
 
 		&:focus {
-			// outline: solid Peru 2px;
 			outline: none;
 			box-shadow: 0px 0px 3px 2px Chocolate;
 		}
@@ -243,7 +245,6 @@
 		box-shadow: 0px 0px 3px SkyBlue;
 
 		&:focus {
-			// outline: solid DeepSkyBlue 2px;
 			outline: none;
 			box-shadow: 0px 0px 3px 2px DeepSkyBlue;
 		}
@@ -253,10 +254,8 @@
 		cursor: pointer;
 		padding: 2px;
 
-
 		img {
 			height: 25px;
-
 
 			&:hover {
 				transform: scale(1.2);
@@ -322,7 +321,6 @@
 
 		&:active {
 			transform: scale(0.97);
-			// background: radial-gradient(rgb(72, 207, 72), DarkGreen);
 			background: ForestGreen;
 			color: white;
 		}

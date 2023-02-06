@@ -20,8 +20,7 @@ const Timer = ({ allSeconds, setProcess }) => {
 		} else if (minutes !== 0 && seconds === 0) {
 			setSeconds(59);
 			setMinutes((m) => m - 1)
-		}
-
+		};
 	}, [seconds]);
 
 	function tick() {

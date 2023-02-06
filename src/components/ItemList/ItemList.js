@@ -30,7 +30,7 @@ const ItemList = ({ activeTrainer }) => {
 				examples.push(items[count]);
 				count++;
 			};
-		}
+		};
 		res = examples.map(example => {
 			const { question, answer, id } = example;
 			return (
